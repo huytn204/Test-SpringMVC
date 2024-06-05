@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vehicle Form</title>
+</head>
+<body>
+<h2 th:text="${#strings.isEmpty(vehicle.vehicle_id) ? 'Add Vehicle' : 'Edit Vehicle'}"></h2>
+<form th:action="@{${#strings.isEmpty(vehicle.vehicle_id) ? '/add' : '/update/' + ${vehicle.vehicle_id}}}" th:object="${vehicle}" method="post">
+    <div>
+        <label>Name: </label>
+        <input type="text" th:field="*{vehicle_name}"/>
+        <p th:if="${#fields.hasErrors('vehicle_name')}" th:errors="*{vehicle_name}">Name Error</p>
+    </div>
+    <div>
+        <label>Model: </label>
+        <input type="text" th:field="*{vehicle_model}"/>
+        <p th:if="${#fields.hasErrors('vehicle_model')}" th:errors="*{vehicle_model}">Model Error</p>
+    </div>
+    <div>
+        <label>Year: </label>
+        <input type="number" th:field="*{year_of_manufacture}"/>
+        <p th:if="${#fields.hasErrors('year_of_manufacture')}" th:errors="*{year_of_manufacture}">Year Error</p>
+    </div>
+    <div>
+        <label>Color: </label>
+        <input type="text" th:field="*{vehicle_color}"/>
+    </div>
+    <div>
+        <button type="submit">Save</button>
+    </div>
+</form>
+</body>
+</html>
